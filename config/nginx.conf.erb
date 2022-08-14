@@ -1,0 +1,199 @@
+daemon off;
+worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
+
+error_log  stderr;
+
+events {
+  use epoll;
+  accept_mutex on;
+  worker_connections 1024;
+}
+
+http {
+  gzip on;
+  gzip_comp_level 2;
+  gzip_proxied any;
+  gzip_types
+    text/css
+    text/javascript
+    text/xml
+    text/plain
+    application/javascript
+    application/x-javascript
+    application/json
+    image/x-icon;
+
+  log_format  main  '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer"  "$http_user_agent" "$http_x_forwarded_for" "$http_x_uuid" [!!!!] "$upstream_http_x_uuid"';
+  access_log  stderr main;
+  rewrite_log on;
+  error_log stderr notice;
+
+  server_tokens off;
+
+  include mime.types;
+  default_type application/octet-stream;
+  sendfile on;
+
+  # Must read the body in 5 seconds.
+  client_body_timeout 5;
+
+  server {
+    listen <%= ENV["PORT"] %>;
+    server_name _;
+    keepalive_timeout 5;
+    root   /app/dist;
+
+    location = / {
+        expires -1;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+
+    }
+
+    location /planningD1 {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /planningP2 {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /registerRoneoD1 {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /signin {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /signup {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /myPlanning {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /classInfo {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /verify {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /confirmCancelCreneauPlanning {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /membersP2 {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /membersD1 {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /planningD1gestion {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /planningP2gestion {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /isThyself {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /setStarted {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /setFinished {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /cancelStarted {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /cancelFinished {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /rollingPlanningP2 {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /rollingPlanningD1 {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /allmembers {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /assignMemberToSlot {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /addClass {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    location /editClass {
+      include uwsgi_params;
+      more_set_headers 'X-Request-Id: $http_x_request_id';
+      uwsgi_pass unix:/tmp/uwsgi.socket;
+    }
+
+    error_page 404 /index.html;
+  }
+}
