@@ -142,6 +142,9 @@ The back-end is built with Python and requires the usual pip query:
   ```sh
   pip install -r requirements.txt
   ```
+  
+*Site note: If you want to deploy from windows you'd have to install uWSGI using the cygwin hack or just ignore the requirement if you're only testing by running directly the flask WSGI server* 
+
 
 #### Third services required:
 
