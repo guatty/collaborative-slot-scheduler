@@ -227,6 +227,8 @@ Front-end
   ```sh
   npm run build
   ```
+  
+ *Side note: you must have the VUE_APP_APIURL set for the back adress*
 
 <!-- USAGE EXAMPLES -->
 ## Usage
