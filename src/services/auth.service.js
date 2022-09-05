@@ -3,7 +3,7 @@ import {
 } from "@capacitor-community/http";
 import Cookies from 'js-cookie'
 
-const API_URL = process.env.VUE_APP_APIURL === undefined ? "https://www.apecs.ml" : process.env.VUE_APP_APIURL;
+const API_URL = process.env.VUE_APP_APIURL;
 class AuthService {
   login(user) {
     return new Promise((resolve, reject) => {
