@@ -150,7 +150,7 @@ cur.execute('''CREATE TABLE "planning_updates" (
 
 
 cur.execute('''INSERT INTO "users" ("firstname","lastname","mail","password","school_year","right_group","active_kind","update_date") VALUES 
-            ('nobody','nobody','nobody@apecs.ml','','P2_2026','membre_P2','non_verifie','2021-06-20 12:34:30'),
+            ('nobody','nobody','nobody@apecs.ml','','P2_2026','membre_P2','non_verifie','2021-06-20 12:34:30')
             ;''')
 
 
