@@ -1058,7 +1058,7 @@ def cancelFinished(user):
     return jsonify({'message': "Vous avez indiqué n'avoir pas fini votre partie !"})
 
 def get_verify_link(mail):
-    return "https://www.apecs.ml/verify?token={}".format(
+    return "http://www.apecs.ml/verify?token={}".format(
         upquote(
             jwt.encode(
                 {'sub': mail, 'iat': datetime.utcnow() },
@@ -1171,7 +1171,7 @@ def logUser():
     user = authenticate(data['mail'].strip(), data['password'])
 
     if not user:
-        return jsonify({ 'message': 'Identifiants incorrects. Si vous n\'arrivez pas à vous connecter, merci de le signaler par mail à : plateforme@apecs.ml', 'authenticated': False }), 401
+        return jsonify({ 'message': 'Identifiants incorrects. Si vous n\'arrivez pas à vous connecter, merci de le signaler sur le Discord de l\'APECS.', 'authenticated': False }), 401
 
     if not is_email_verified(data['mail'].strip()):
         return jsonify({ 'message': 'Vous devez confirmer votre adresse mail pour vous connecter (vous avez reçu le lien de confirmation par mail, veuillez vérifier vos dossiers spams et promotions)', 'authenticated': False }), 401
